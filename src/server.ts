@@ -1,4 +1,5 @@
 import dotenv from 'dotenv'
+import "reflect-metadata" // shim
 
 import {getApp} from "./app";
 import {getConfigHelper} from "./core/config/helper";
