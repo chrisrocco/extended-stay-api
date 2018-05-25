@@ -1,12 +1,6 @@
 import express, {Request, Response} from 'express'
-import dotenv from 'dotenv'
-import {getConfigHelper} from "./core/config/helper";
-import {getConfig} from "./_config";
 
-export default async () => {
-    // SETUP CONFIG
-    dotenv.config()
-    const config = getConfigHelper(getConfig(process.env))
+export const getApp = async (config) => {
 
     const app = express()
 
