@@ -1,4 +1,5 @@
 import express, {Request, Response} from 'express'
+import {openDBConnection} from "./core/database/open-connection";
 
 /**
  * COMPOSITION ROOT
@@ -6,6 +7,8 @@ import express, {Request, Response} from 'express'
  */
 
 const getApp = async (config) => {
+
+    const dbConnection = await openDBConnection(config)
 
     const app = express()
 

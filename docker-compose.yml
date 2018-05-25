@@ -14,10 +14,18 @@ services:
     volumes:
       - ./:/app
     environment:
+      MYSQL_HOST: database
+      MYSQL_USER: root
+      MYSQL_PASS: secret
+      MYSQL_DB: staypoints
     ports:
       - 8080:80
 
   database:
-    image: mongo:latest
+    image: mysql:5.7
+    restart: always
     ports:
-      - 27017:27017
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: staypoints
