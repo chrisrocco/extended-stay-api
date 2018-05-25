@@ -1,18 +1,18 @@
 import dotenv from 'dotenv'
+
+import {getApp} from "./app";
 import {getConfigHelper} from "./core/config/helper";
 import {getConfig} from "./_config";
-import {getApp} from "./app";
+
+dotenv.config()
+const config = getConfigHelper(getConfig(process.env))
+const app$ = getApp(config)
 
 const startServer = async () => {
-
-    dotenv.config()
-    const config = getConfigHelper(getConfig(process.env))
-
-    let app = await getApp(config)
-
+    let app = await app$
     app.listen(8000, () => console.log('app listening on port 8000'))
 }
 
-startServer()
+const server$ = startServer()
 
-export { startServer }
+export { server$ }

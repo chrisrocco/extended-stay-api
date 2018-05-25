@@ -1,10 +1,17 @@
 import express, {Request, Response} from 'express'
 
-export const getApp = async (config) => {
+/**
+ * COMPOSITION ROOT
+ * =========================
+ */
+
+const getApp = async (config) => {
 
     const app = express()
 
-    app.get('ping', (request: Request, response: Response) => response.send('Pong!'))
+    app.get('/ping', (request: Request, response: Response) => response.send('pong'))
 
     return app
 }
+
+export { getApp }
