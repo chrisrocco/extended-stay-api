@@ -1,0 +1,23 @@
+version: '3.3'
+
+networks:
+  default:
+    external:
+      name: research-coder
+
+services:
+
+  rc-auth:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./:/app
+    environment:
+    ports:
+      - 8080:80
+
+  database:
+    image: mongo:latest
+    ports:
+      - 27017:27017
