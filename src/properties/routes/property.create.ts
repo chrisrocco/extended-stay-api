@@ -23,6 +23,7 @@ export const createProperty = ({ connection }): Route => ({
 
 
     controller: async ({ properties }) =>
+
         await connection
             .getRepository(Property)
             .save(properties)

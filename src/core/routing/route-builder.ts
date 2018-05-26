@@ -1,8 +1,4 @@
-import {NextFunction, Request, Response} from "express";
-
-type Handler = (request: Request, response: Response, next: NextFunction) => Promise<any>
-
-type Controller = (object) => Promise<object>
+import {Handler, NextFunction, Request, Response} from "express";
 
 export type Route = {
     name?: string
@@ -10,13 +6,16 @@ export type Route = {
     route: string
     validators?: Handler[]
     mapper?: (req: Request) => object
-    controller: Controller
+    controller: (object) => Promise<object>
 }
 
-let attempt = (mapper, controller) => (req, res) =>
-    controller(mapper(req))
-        .then( data => res.json(data) )
-        .catch( err => res.status(500).json({err}))
+
+let attempt = (mapper, controller) =>
+    (req, res, next) =>
+        controller(mapper(req))
+            .then(res.json)
+            .catch(next)
+
 
 export const addRoute = (router, route: Route) => {
 
