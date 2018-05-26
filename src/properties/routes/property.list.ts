@@ -1,5 +1,5 @@
 import {Route} from "../../core/routing/route-builder";
-import {Property} from "../models/Property";
+import {Property} from "../entities/Property";
 
 export const listProperties = ({ connection }): Route => ({
 

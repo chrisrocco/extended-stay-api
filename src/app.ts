@@ -12,7 +12,6 @@ import {listProperties} from "./properties/routes/property.list";
  * COMPOSITION ROOT
  * =========================
  */
-
 const getApp = async (config) => {
 
     // open database connection
@@ -23,14 +22,16 @@ const getApp = async (config) => {
     app.use(bodyParser.json())
     app.use(bodyParser({ extended: true }))
 
-    let routes = [
-        listProperties({connection}),
-        deleteProperty({connection}),
-        createProperty({connection}),
-        updateProperty({connection})
-    ]
+    // load the routes
+    let routeObjects = [
+        // properties
+        listProperties,
+        deleteProperty,
+        createProperty,
+        updateProperty
+    ].map( r => r({connection}))
 
-    routes.forEach( route => addRoute(app, route) )
+    routeObjects.forEach( route => addRoute(app, route) )
 
     app.get('/ping', (_, r) => r.send('pong'))
 

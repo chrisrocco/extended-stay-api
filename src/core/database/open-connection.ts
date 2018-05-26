@@ -1,5 +1,5 @@
 import {createConnection} from "typeorm";
-import {entities} from "./entities";
+import {entities} from "../../_entities";
 
 export const openDBConnection = (config) => createConnection({
     type: 'mysql',

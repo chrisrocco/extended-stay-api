@@ -1,6 +1,6 @@
 import {Route} from "../../core/routing/route-builder";
 import {validateExists} from "../../core/validation/exists";
-import {Property} from "../models/Property";
+import {Property} from "../entities/Property";
 import {validateBody} from "../../core/validation/schema";
 import {propSchema} from "../validation/property.schema";
 
