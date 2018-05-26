@@ -19,8 +19,13 @@ let attempt = (mapper, controller) => (req, res) =>
         .catch( err => res.status(500).json({err}))
 
 export const addRoute = (router, route: Route) => {
-    route.validators = route.validators || []
-    if(!route.mapper) route.mapper = I => ({ I })
+
+    // pad the validators array
+    if(!route.validators) route.validators = []
+
+    // set a default mapper function
+    // identity function... because we still want the async error handler
+    if(!route.mapper) route.mapper = I => I
 
     return router[route.method](
         route.route,
