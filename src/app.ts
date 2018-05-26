@@ -24,12 +24,11 @@ const getApp = async (config) => {
 
     // load the routes
     let routeObjects = [
-        // properties
-        listProperties,
-        deleteProperty,
-        createProperty,
-        updateProperty
-    ].map( r => r({connection}))
+        listProperties({connection}),
+        deleteProperty({connection}),
+        createProperty({connection}),
+        updateProperty({connection})
+    ]
 
     routeObjects.forEach( route => addRoute(app, route) )
 
