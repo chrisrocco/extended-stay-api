@@ -25,11 +25,16 @@ const properties = [
 test('properties endpoint test', async () => {
     let app = await app$
 
-    return await request(app).post('/properties')
+    let response = await request(app).post('/properties')
         .send({ properties })
-        .then( response => {
-            expect(response.statusCode).toBe(200)
-        })
+    expect(response.statusCode).toBe(200)
+})
+
+test('Delete property', async () => {
+    let app = await app$
+
+    let res = await request(app).delete('/properties/99')
+    expect(res.statusCode).toBe(404)
 })
 
 test('list properties', async () => {

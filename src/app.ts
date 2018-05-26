@@ -1,8 +1,12 @@
 import express from 'express'
 import {openDBConnection} from "./core/database/open-connection";
-import {propertyRoutes} from "./properties/routes";
 import {addRoute} from "./core/routing/route-builder";
 import bodyParser = require("body-parser");
+
+import {deleteProperty} from "./properties/routes/property.delete";
+import {createProperty} from "./properties/routes/property.create";
+import {updateProperty} from "./properties/routes/property.update";
+import {listProperties} from "./properties/routes/property.list";
 
 /**
  * COMPOSITION ROOT
@@ -20,7 +24,10 @@ const getApp = async (config) => {
     app.use(bodyParser({ extended: true }))
 
     let routes = [
-        ...propertyRoutes({ connection })
+        listProperties({connection}),
+        deleteProperty({connection}),
+        createProperty({connection}),
+        updateProperty({connection})
     ]
 
     routes.forEach( route => addRoute(app, route) )
