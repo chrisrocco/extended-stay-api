@@ -1,6 +1,8 @@
-import express, {Request, Response} from 'express'
+import express from 'express'
 import {openDBConnection} from "./core/database/open-connection";
-import {PropertiesRouter} from "./properties/routes";
+import {propertyRoutes} from "./properties/routes";
+import {addRoute} from "./core/routing/route-builder";
+import bodyParser = require("body-parser");
 
 /**
  * COMPOSITION ROOT
@@ -9,15 +11,21 @@ import {PropertiesRouter} from "./properties/routes";
 
 const getApp = async (config) => {
 
-    const dbConnection = await openDBConnection(config)
+    // open database connection
+    const connection = await openDBConnection(config)
 
-
-    const propertyRouter = PropertiesRouter(config)
-
+    // bootstrap the app
     const app = express()
+    app.use(bodyParser.json())
+    app.use(bodyParser({ extended: true }))
 
-    app.use(propertyRouter)
-    app.get('/ping', (request: Request, response: Response) => response.send('pong'))
+    let routes = [
+        ...propertyRoutes({ connection })
+    ]
+
+    routes.forEach( route => addRoute(app, route) )
+
+    app.get('/ping', (_, r) => r.send('pong'))
 
     return app
 }
