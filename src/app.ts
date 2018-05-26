@@ -8,6 +8,7 @@ import {createProperty} from "./properties/routes/property.create";
 import {updateProperty} from "./properties/routes/property.update";
 import {listProperties} from "./properties/routes/property.list";
 import {pingRoute} from "./healthcheck/ping.route";
+import {getProperty} from "./properties/routes/property.one";
 
 /**
  * COMPOSITION ROOT
@@ -29,9 +30,9 @@ const getApp = async (config) => {
         deleteProperty({connection}),
         createProperty({connection}),
         updateProperty({connection}),
+        getProperty({connection}),
         pingRoute
     ]
-
     routeObjects.forEach( route => useRoute(app, route) )
 
     return app
