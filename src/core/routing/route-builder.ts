@@ -26,9 +26,5 @@ export const addRoute = (router, route: Route) => {
     // identity function... because we still want the async error handler
     if(!route.mapper) route.mapper = I => I
 
-    return router[route.method](
-        route.route,
-        ...route.validators,
-        attempt(route.mapper, route.controller)
-    )
+    return router[route.method]( route.route, ...route.validators, attempt(route.mapper, route.controller) )
 }
