@@ -1,26 +1,21 @@
-import {Route} from "../../core/routing/route-builder";
 import {Property} from "../entities/Property";
 import {validateBody} from "../../core/validation/schema";
 import {createSchema} from "../validation/property.schema";
+import {Route} from "../../core/routing/Route";
 
 export const createProperty = ({ connection }): Route => ({
 
     name: 'Create Property',
 
-
     method: 'post',
 
-
-    route: '/properties',
-
+    path: '/properties',
 
     validators: [
         validateBody(createSchema)
     ],
 
-
     mapper: req => req.body,
-
 
     controller: async ({ properties }) =>
 

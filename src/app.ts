@@ -1,12 +1,13 @@
 import express from 'express'
 import {openDBConnection} from "./core/database/open-connection";
-import {addRoute} from "./core/routing/route-builder";
+import {useRoute} from "./core/routing/route-builder";
 import bodyParser = require("body-parser");
 
 import {deleteProperty} from "./properties/routes/property.delete";
 import {createProperty} from "./properties/routes/property.create";
 import {updateProperty} from "./properties/routes/property.update";
 import {listProperties} from "./properties/routes/property.list";
+import {pingRoute} from "./core/healthcheck/ping.route";
 
 /**
  * COMPOSITION ROOT
@@ -27,12 +28,11 @@ const getApp = async (config) => {
         listProperties({connection}),
         deleteProperty({connection}),
         createProperty({connection}),
-        updateProperty({connection})
+        updateProperty({connection}),
+        pingRoute
     ]
 
-    routeObjects.forEach( route => addRoute(app, route) )
-
-    app.get('/ping', (_, r) => r.send('pong'))
+    routeObjects.forEach( route => useRoute(app, route) )
 
     return app
 }

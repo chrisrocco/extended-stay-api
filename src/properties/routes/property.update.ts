@@ -1,8 +1,8 @@
-import {Route} from "../../core/routing/route-builder";
 import {validateExists} from "../../core/validation/exists";
 import {Property} from "../entities/Property";
 import {validateBody} from "../../core/validation/schema";
 import {propSchema} from "../validation/property.schema";
+import {Route} from "../../core/routing/Route";
 
 export const updateProperty = ({ connection }): Route => ({
 
@@ -10,7 +10,7 @@ export const updateProperty = ({ connection }): Route => ({
 
     method: 'put',
 
-    route: '/properties/:id',
+    path: '/properties/:id',
 
     validators: [
         validateExists(connection)('id', 'id', Property),

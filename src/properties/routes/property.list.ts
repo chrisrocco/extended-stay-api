@@ -1,5 +1,5 @@
-import {Route} from "../../core/routing/route-builder";
 import {Property} from "../entities/Property";
+import {Route} from "../../core/routing/Route";
 
 export const listProperties = ({ connection }): Route => ({
 
@@ -7,7 +7,7 @@ export const listProperties = ({ connection }): Route => ({
 
     method: 'get',
 
-    route: '/properties',
+    path: '/properties',
 
     controller: async () =>
         await connection
