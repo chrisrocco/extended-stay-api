@@ -1,4 +1,4 @@
-import {Route} from "../routing/route-builder";
+import {Route} from "../core/routing/Route";
 
 export const pingRoute: Route = {
     method: 'get',

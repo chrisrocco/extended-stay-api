@@ -7,7 +7,7 @@ import {deleteProperty} from "./properties/routes/property.delete";
 import {createProperty} from "./properties/routes/property.create";
 import {updateProperty} from "./properties/routes/property.update";
 import {listProperties} from "./properties/routes/property.list";
-import {pingRoute} from "./core/healthcheck/ping.route";
+import {pingRoute} from "./healthcheck/ping.route";
 
 /**
  * COMPOSITION ROOT
